@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "31819571-ac41-4735-84c3-f1da78645494",
+		"name": "MyCalendar",
+		"description": "Task My calendar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1884401"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Hunan Huffnanyan\",\r\n    \"email\": \"hhhunanyadn1@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password_confirmation\": \"12345678\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"token\", JSON.parse(responseBody).token);\r",
+							"pm.environment.set(\"adminAccessToken\", JSON.parse(responseBody).token);\r",
+							"/**postman.setEnvironmentVariable(\"token\", responseHeaders.Authorization);**/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hhhunanyan@gmail.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Calendar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDg2NTljNmQzMzc3YmQ3NjA1NWM5YWI3N2ZmOTQ0NzZlZDE4NjE2NzU0ZmI0Nzc2YWEwMWRkNzYxZTJlZjJmNDhmZTY3NDRiOWFhN2ViMWYiLCJpYXQiOjE2NzIwNDMyNjQuMzY1NzMsIm5iZiI6MTY3MjA0MzI2NC4zNjU3NDIsImV4cCI6MTcwMzU3OTI2NC4yNTU0MzUsInN1YiI6IjEyIiwic2NvcGVzIjpbXX0.CIoOIFfC4vaTTn7Zn2_jx4XO9CxWbcqLVbGPHlCsSOT6rXCKH0eESELa0GyraFVPTbadYuxcBjVZ6I3kK-UhjjEEM4syaYA8iixMM-O2XqJXlNtj1wdHhyoM2N9LeVr8-hphxYhAMJHW2yo9rhb-BXUZFMc4pXlZ0eXFJ4SiAtQRyQqwZcXAdM-MXUeaJ5r6neTeo3RykaPKgNM23ZdqgyJH4_YsY4XzhB6cwWWI6JxWRtFIRRUhqzs1pDpKi11z6ldpRAQVwVTxjOVYygoLHlANCaU4gYR89Fk6wbbKdZ7WghK-G3XeuTTpj5se4MPMphJsuVAyFNneR1CsLsm4vX9tJYL5TTLhuTbbv_vsgnblg4XtEAtthHAfCJONFa8tvCDI6qNIAfVOGPo-9VbRlHu5Rm69jvqFihToxe1UnXHYeiBY_wSMStSxzNerYaIF7R3MjqSCT_kTNIHB405jwI0Zah4M91sJDZFZQln34y1LlM4ZeLgjQ53jAeakIZAtymnpXA4eHfpZ7CGpKHx4CmgmkMYFhmeiC98W_GBY8R7AJ9YP9O2k_pRQQ-5vEi6aq4Ffuja1z5VPZjjiY8hzU9atfq7uWE7KBHLs_BNmCJXPRmUMYQyOrhSCxLGThVztmCxxQWA8rKw9kmyzRUmyMLfYx3DsrmkrY_jlNQt7wWo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"New Event\",\r\n    \"description\":\"New Event description\",\r\n    \"start\":\"2022-12-26 16:10:20\",\r\n    \"duration\":\"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/calendar",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"calendar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get By dateTime  Interval",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDg2NTljNmQzMzc3YmQ3NjA1NWM5YWI3N2ZmOTQ0NzZlZDE4NjE2NzU0ZmI0Nzc2YWEwMWRkNzYxZTJlZjJmNDhmZTY3NDRiOWFhN2ViMWYiLCJpYXQiOjE2NzIwNDMyNjQuMzY1NzMsIm5iZiI6MTY3MjA0MzI2NC4zNjU3NDIsImV4cCI6MTcwMzU3OTI2NC4yNTU0MzUsInN1YiI6IjEyIiwic2NvcGVzIjpbXX0.CIoOIFfC4vaTTn7Zn2_jx4XO9CxWbcqLVbGPHlCsSOT6rXCKH0eESELa0GyraFVPTbadYuxcBjVZ6I3kK-UhjjEEM4syaYA8iixMM-O2XqJXlNtj1wdHhyoM2N9LeVr8-hphxYhAMJHW2yo9rhb-BXUZFMc4pXlZ0eXFJ4SiAtQRyQqwZcXAdM-MXUeaJ5r6neTeo3RykaPKgNM23ZdqgyJH4_YsY4XzhB6cwWWI6JxWRtFIRRUhqzs1pDpKi11z6ldpRAQVwVTxjOVYygoLHlANCaU4gYR89Fk6wbbKdZ7WghK-G3XeuTTpj5se4MPMphJsuVAyFNneR1CsLsm4vX9tJYL5TTLhuTbbv_vsgnblg4XtEAtthHAfCJONFa8tvCDI6qNIAfVOGPo-9VbRlHu5Rm69jvqFihToxe1UnXHYeiBY_wSMStSxzNerYaIF7R3MjqSCT_kTNIHB405jwI0Zah4M91sJDZFZQln34y1LlM4ZeLgjQ53jAeakIZAtymnpXA4eHfpZ7CGpKHx4CmgmkMYFhmeiC98W_GBY8R7AJ9YP9O2k_pRQQ-5vEi6aq4Ffuja1z5VPZjjiY8hzU9atfq7uWE7KBHLs_BNmCJXPRmUMYQyOrhSCxLGThVztmCxxQWA8rKw9kmyzRUmyMLfYx3DsrmkrY_jlNQt7wWo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"New Event\",\r\n    \"description\":\"New Event description\",\r\n    \"start\":\"2022-12-30 05:15:00\",\r\n    \"duration\":\"40\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/calendar?start=2023-12-10 05:15:00&end=2024-10-31 05:15:01",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"calendar"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2023-12-10 05:15:00"
+						},
+						{
+							"key": "end",
+							"value": "2024-10-31 05:15:01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get By id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDg2NTljNmQzMzc3YmQ3NjA1NWM5YWI3N2ZmOTQ0NzZlZDE4NjE2NzU0ZmI0Nzc2YWEwMWRkNzYxZTJlZjJmNDhmZTY3NDRiOWFhN2ViMWYiLCJpYXQiOjE2NzIwNDMyNjQuMzY1NzMsIm5iZiI6MTY3MjA0MzI2NC4zNjU3NDIsImV4cCI6MTcwMzU3OTI2NC4yNTU0MzUsInN1YiI6IjEyIiwic2NvcGVzIjpbXX0.CIoOIFfC4vaTTn7Zn2_jx4XO9CxWbcqLVbGPHlCsSOT6rXCKH0eESELa0GyraFVPTbadYuxcBjVZ6I3kK-UhjjEEM4syaYA8iixMM-O2XqJXlNtj1wdHhyoM2N9LeVr8-hphxYhAMJHW2yo9rhb-BXUZFMc4pXlZ0eXFJ4SiAtQRyQqwZcXAdM-MXUeaJ5r6neTeo3RykaPKgNM23ZdqgyJH4_YsY4XzhB6cwWWI6JxWRtFIRRUhqzs1pDpKi11z6ldpRAQVwVTxjOVYygoLHlANCaU4gYR89Fk6wbbKdZ7WghK-G3XeuTTpj5se4MPMphJsuVAyFNneR1CsLsm4vX9tJYL5TTLhuTbbv_vsgnblg4XtEAtthHAfCJONFa8tvCDI6qNIAfVOGPo-9VbRlHu5Rm69jvqFihToxe1UnXHYeiBY_wSMStSxzNerYaIF7R3MjqSCT_kTNIHB405jwI0Zah4M91sJDZFZQln34y1LlM4ZeLgjQ53jAeakIZAtymnpXA4eHfpZ7CGpKHx4CmgmkMYFhmeiC98W_GBY8R7AJ9YP9O2k_pRQQ-5vEi6aq4Ffuja1z5VPZjjiY8hzU9atfq7uWE7KBHLs_BNmCJXPRmUMYQyOrhSCxLGThVztmCxxQWA8rKw9kmyzRUmyMLfYx3DsrmkrY_jlNQt7wWo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"New Event\",\r\n    \"description\":\"New Event description\",\r\n    \"start\":\"2022-12-30 05:15:00\",\r\n    \"duration\":\"40\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/calendar/50",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"calendar",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete By id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDg2NTljNmQzMzc3YmQ3NjA1NWM5YWI3N2ZmOTQ0NzZlZDE4NjE2NzU0ZmI0Nzc2YWEwMWRkNzYxZTJlZjJmNDhmZTY3NDRiOWFhN2ViMWYiLCJpYXQiOjE2NzIwNDMyNjQuMzY1NzMsIm5iZiI6MTY3MjA0MzI2NC4zNjU3NDIsImV4cCI6MTcwMzU3OTI2NC4yNTU0MzUsInN1YiI6IjEyIiwic2NvcGVzIjpbXX0.CIoOIFfC4vaTTn7Zn2_jx4XO9CxWbcqLVbGPHlCsSOT6rXCKH0eESELa0GyraFVPTbadYuxcBjVZ6I3kK-UhjjEEM4syaYA8iixMM-O2XqJXlNtj1wdHhyoM2N9LeVr8-hphxYhAMJHW2yo9rhb-BXUZFMc4pXlZ0eXFJ4SiAtQRyQqwZcXAdM-MXUeaJ5r6neTeo3RykaPKgNM23ZdqgyJH4_YsY4XzhB6cwWWI6JxWRtFIRRUhqzs1pDpKi11z6ldpRAQVwVTxjOVYygoLHlANCaU4gYR89Fk6wbbKdZ7WghK-G3XeuTTpj5se4MPMphJsuVAyFNneR1CsLsm4vX9tJYL5TTLhuTbbv_vsgnblg4XtEAtthHAfCJONFa8tvCDI6qNIAfVOGPo-9VbRlHu5Rm69jvqFihToxe1UnXHYeiBY_wSMStSxzNerYaIF7R3MjqSCT_kTNIHB405jwI0Zah4M91sJDZFZQln34y1LlM4ZeLgjQ53jAeakIZAtymnpXA4eHfpZ7CGpKHx4CmgmkMYFhmeiC98W_GBY8R7AJ9YP9O2k_pRQQ-5vEi6aq4Ffuja1z5VPZjjiY8hzU9atfq7uWE7KBHLs_BNmCJXPRmUMYQyOrhSCxLGThVztmCxxQWA8rKw9kmyzRUmyMLfYx3DsrmkrY_jlNQt7wWo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/calendar/12",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"calendar",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDg2NTljNmQzMzc3YmQ3NjA1NWM5YWI3N2ZmOTQ0NzZlZDE4NjE2NzU0ZmI0Nzc2YWEwMWRkNzYxZTJlZjJmNDhmZTY3NDRiOWFhN2ViMWYiLCJpYXQiOjE2NzIwNDMyNjQuMzY1NzMsIm5iZiI6MTY3MjA0MzI2NC4zNjU3NDIsImV4cCI6MTcwMzU3OTI2NC4yNTU0MzUsInN1YiI6IjEyIiwic2NvcGVzIjpbXX0.CIoOIFfC4vaTTn7Zn2_jx4XO9CxWbcqLVbGPHlCsSOT6rXCKH0eESELa0GyraFVPTbadYuxcBjVZ6I3kK-UhjjEEM4syaYA8iixMM-O2XqJXlNtj1wdHhyoM2N9LeVr8-hphxYhAMJHW2yo9rhb-BXUZFMc4pXlZ0eXFJ4SiAtQRyQqwZcXAdM-MXUeaJ5r6neTeo3RykaPKgNM23ZdqgyJH4_YsY4XzhB6cwWWI6JxWRtFIRRUhqzs1pDpKi11z6ldpRAQVwVTxjOVYygoLHlANCaU4gYR89Fk6wbbKdZ7WghK-G3XeuTTpj5se4MPMphJsuVAyFNneR1CsLsm4vX9tJYL5TTLhuTbbv_vsgnblg4XtEAtthHAfCJONFa8tvCDI6qNIAfVOGPo-9VbRlHu5Rm69jvqFihToxe1UnXHYeiBY_wSMStSxzNerYaIF7R3MjqSCT_kTNIHB405jwI0Zah4M91sJDZFZQln34y1LlM4ZeLgjQ53jAeakIZAtymnpXA4eHfpZ7CGpKHx4CmgmkMYFhmeiC98W_GBY8R7AJ9YP9O2k_pRQQ-5vEi6aq4Ffuja1z5VPZjjiY8hzU9atfq7uWE7KBHLs_BNmCJXPRmUMYQyOrhSCxLGThVztmCxxQWA8rKw9kmyzRUmyMLfYx3DsrmkrY_jlNQt7wWo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"New Event\",\r\n    \"description\":\"New Event description\",\r\n    \"start\":\"2022-12-26 15:18:00\",\r\n    \"duration\":\"40\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/calendar/update/13",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"calendar",
+						"update",
+						"13"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
